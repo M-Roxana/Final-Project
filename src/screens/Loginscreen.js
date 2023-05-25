@@ -7,8 +7,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loading, setloading] = useState(false);
-  const [error, seterror] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
   async function Login() {
     const user = {
@@ -17,16 +17,16 @@ function Login() {
     };
 
     try {
-      setloading(true);
+      setLoading(true);
       const result = (await axios.post(`/api/users/login`, user)).data;
-      setloading(false);
+      setLoading(false);
 
       localStorage.setItem("currentUser", JSON.stringify(result));
       window.location.href = "/home";
     } catch (error) {
       console.log(error);
-      setloading(false);
-      seterror(true);
+      setLoading(false);
+      setError(true);
     }
   }
 
@@ -36,12 +36,11 @@ function Login() {
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5">
           {error && <Error message="Invalid credentials " />}
-          <div className="bs">
+          <div className=" bs">
             <h2 className="text-center">Login</h2>
-
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="email"
               value={email}
               onChange={(e) => {
@@ -50,7 +49,7 @@ function Login() {
             />
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="password"
               value={password}
               onChange={(e) => {
