@@ -9,6 +9,8 @@ function Room({ room, fromDate, toDate }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [fullscreen, setFullscreen] = useState(true);
+
   return (
     <div className="row bs">
       <div className="col-md-4">
@@ -23,24 +25,26 @@ function Room({ room, fromDate, toDate }) {
           <p>Type : {room.type}</p>
         </b>
         <div style={{ float: "right" }}>
-          <Link to={`/book/${room._id}/${fromDate}/${toDate}`}>
-            <button className="btn btn-primary m-2">Book now</button>
-          </Link>
+          {fromDate && toDate && (
+            <Link to={`/book/${room._id}/${fromDate}/${toDate}`}>
+              <button className="btn btn-primary m-2">Book now</button>
+            </Link>
+          )}
           <button className="btn btn-primary" onClick={handleShow}>
             View details
           </button>
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={show} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>{room.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Carousel prevLabel="" nextLabel="empty">
-            {room.imageurls.map((url) => {
+            {room.imageurls.map((url, index) => {
               return (
-                <Carousel.Item>
+                <Carousel.Item key={index}>
                   <img className="d-block w-100 bigimg" src={url} />
                 </Carousel.Item>
               );
