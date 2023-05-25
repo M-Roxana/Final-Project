@@ -10,8 +10,8 @@ function Register() {
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
 
-  const [loading, setloading] = useState(false);
-  const [error, seterror] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   const [succes, setsucces] = useState();
 
   async function register() {
@@ -24,9 +24,9 @@ function Register() {
       };
 
       try {
-        setloading(true);
+        setLoading(true);
         const result = await axios.post(`/api/users/register`, user).data;
-        setloading(false);
+        setLoading(false);
         setsucces(true);
 
         setName("");
@@ -35,8 +35,8 @@ function Register() {
         setCpassword("");
       } catch (error) {
         console.log(error);
-        setloading(false);
-        seterror(true);
+        setLoading(false);
+        setError(true);
       }
     } else {
       alert("Passwords not matched");
@@ -54,7 +54,7 @@ function Register() {
             <h2 className="text-center">Register</h2>
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="name"
               value={name}
               onChange={(e) => {
@@ -63,7 +63,7 @@ function Register() {
             />
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="email"
               value={email}
               onChange={(e) => {
@@ -72,7 +72,7 @@ function Register() {
             />
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="password"
               value={password}
               onChange={(e) => {
@@ -81,7 +81,7 @@ function Register() {
             />
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-2"
               placeholder="confirm password"
               value={cpassword}
               onChange={(e) => {
