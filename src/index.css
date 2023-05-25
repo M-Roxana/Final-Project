@@ -15,6 +15,11 @@ code {
     monospace;
 }
 
+p {
+  font-size: 16px !important ;
+  margin-bottom: 0.2rem !important;
+}
+
 .navbar {
   background-color: black !important;
 }
@@ -55,15 +60,28 @@ h1 {
 }
 
 .bigimg {
-  height: 400px;
+  /* height: 400px; */
+  max-height: 80vh;
   border-radius: 5px;
   margin: 5px;
 }
 
-input {
+input,
+select {
   box-shadow: none !important;
   margin-top: 10px;
-  border: 1px solid black !important;
+  border: 2px solid black !important;
+  width: 100% !important;
+}
+.ant-picker {
+  box-shadow: none !important;
+  border: 2px solid black !important;
+  width: 100% !important;
+  height: 100%;
+}
+
+.ant-picker-input input {
+  border: none !important;
 }
 
 h2 {
@@ -78,4 +96,8 @@ h2 {
 
 .fa-solid {
   margin-right: 10px;
+}
+
+.text-right {
+  text-align: right !important;
 }
