@@ -45,8 +45,8 @@ function Navbar() {
                     </button>
                     <ul className="dropdown-menu">
                       <li>
-                        <a className="dropdown-item" href="#">
-                          Bookings
+                        <a className="dropdown-item" href="/profile">
+                          Profile
                         </a>
                       </li>
                       <li>
