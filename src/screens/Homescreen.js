@@ -42,7 +42,7 @@ function Homescreen() {
       setFromDate(dates[0].format("DD-MM-YYYY"));
       setToDate(dates[1].format("DD-MM-YYYY"));
       var tempRooms = [];
-      var availability = false;
+      var availability = true;
 
       for (const room of duplicateRooms) {
         if (room.currentbookings.length > 0) {
@@ -51,30 +51,38 @@ function Homescreen() {
             const startStr = start.format("YYYY-MM-DD");
             const end = moment(booking.toDate, "DD-MM-YYYY");
             const endStr = end.format("YYYY-MM-DD");
-
             if (
-              !moment(dates[0].format("DD-MM-YYYY")).isBetween(
-                booking.fromDate,
-                booking.toDate
+              moment(dates[0].format("YYYY-MM-DD")).isBetween(
+                startStr,
+                endStr,
+                undefined,
+                "[]"
               ) &&
-              !moment(dates[1].format("DD-MM-YYYY")).isBetween(
-                booking.fromDate,
-                booking.toDate
-              )
+              moment(dates[1].format("YYYY-MM-DD")).isBetween(
+                startStr,
+                endStr,
+                undefined,
+                "[]"
+              ) &&
+              (moment(startStr).isBetween(
+                dates[0].format("YYYY-MM-DD"),
+                dates[1].format("YYYY-MM-DD"),
+                undefined,
+                "[]"
+              ) ||
+                moment(endStr).isBetween(
+                  dates[0].format("YYYY-MM-DD"),
+                  dates[1].format("YYYY-MM-DD"),
+                  undefined,
+                  "[]"
+                ))
             ) {
-              if (
-                moment(dates[0].format("DD-MM-YYYY")) !== booking.fromDate &&
-                moment(dates[0].format("DD-MM-YYYY")) !== booking.toDate &&
-                moment(dates[1].format("DD-MM-YYYY")) !== booking.fromDate &&
-                moment(dates[1].format("DD-MM-YYYY")) !== booking.toDate
-              ) {
-                availability = true;
-              }
+              availability = false;
             }
           }
         }
 
-        if (availability !== true || room.currentbookings.length == 0) {
+        if (availability == true || room.currentbookings.length == 0) {
           tempRooms.push(room);
         }
         setRooms(tempRooms);
